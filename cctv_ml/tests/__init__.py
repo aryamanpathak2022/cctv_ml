@@ -1,0 +1,1 @@
+"""Test suite for CCTV ML vulnerability assessment tool"""
