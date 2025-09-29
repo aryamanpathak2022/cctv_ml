@@ -1,0 +1,131 @@
+# CCTV ML - Default Configuration File
+# This file contains the default configuration for the CCTV vulnerability assessment tool
+
+# Logging configuration
+logging:
+  level: INFO
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file: 'logs/cctv_ml.log'
+
+# Database configuration
+database:
+  path: 'vulnerability_db/cctv_vulns.db'
+  backup_enabled: true
+  backup_interval_hours: 24
+
+# Scanning configuration
+scanning:
+  max_concurrent_scans: 50
+  timeout_seconds: 30
+  retry_attempts: 3
+  user_agents:
+    - 'CCTV-Security-Scanner/1.0'
+    - 'Mozilla/5.0 (compatible; CCTVBot/1.0)'
+    - 'SecurityScanner/1.0'
+
+# AI/ML configuration
+ai:
+  model_path: 'models/'
+  prediction_threshold: 0.7
+  max_predictions_per_device: 10
+  retrain_interval_days: 7
+
+# Exploitation configuration
+exploitation:
+  enabled: true
+  max_concurrent_exploits: 10
+  timeout_seconds: 60
+  safe_mode: true  # Prevents destructive actions
+
+# Dashboard configuration
+dashboard:
+  host: '0.0.0.0'
+  port: 5000
+  debug: false
+  secret_key: 'change-this-in-production'
+
+# External API configuration
+external_apis:
+  shodan_api_key: null
+  censys_api_id: null
+  censys_api_secret: null
+  nvd_api_key: null
+
+# Threat intelligence configuration
+threat_intelligence:
+  update_interval_hours: 6
+  sources:
+    - 'https://cve.mitre.org/data/downloads/allitems.xml'
+    - 'https://nvd.nist.gov/feeds/json/cve/1.1/nvdcve-1.1-recent.json.gz'
+
+# Notification configuration
+notifications:
+  email:
+    enabled: false
+    smtp_server: 'localhost'
+    smtp_port: 587
+    username: ''
+    password: ''
+    from_address: 'cctv-ml@localhost'
+    recipients: []
+  
+  slack:
+    enabled: false
+    webhook_url: ''
+    channel: '#security'
+  
+  # Notification triggers
+  triggers:
+    critical_vulnerability_found: true
+    successful_exploit: true
+    new_device_discovered: false
+    scan_completed: false
+
+# Reporting configuration
+reporting:
+  output_directory: 'reports/'
+  formats:
+    - 'json'
+    - 'html'
+    - 'pdf'
+  include_screenshots: true
+  template_directory: 'templates/reports/'
+
+# Security configuration
+security:
+  api_rate_limit: 100  # requests per minute
+  session_timeout_minutes: 30
+  csrf_protection: true
+  ssl_verify: true
+
+# Performance tuning
+performance:
+  worker_threads: 4
+  connection_pool_size: 100
+  request_timeout: 30
+  max_memory_usage_mb: 1024
+
+# Custom vulnerability signatures
+custom_signatures:
+  enabled: true
+  signature_directory: 'signatures/'
+  auto_update: true
+
+# Integration settings
+integrations:
+  misp:
+    enabled: false
+    url: ''
+    api_key: ''
+  
+  opencti:
+    enabled: false
+    url: ''
+    api_key: ''
+  
+  jira:
+    enabled: false
+    url: ''
+    username: ''
+    api_token: ''
+    project_key: 'SEC'
